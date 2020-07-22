@@ -1,0 +1,58 @@
+==
+<?php
+function onInit()
+{
+    $themePath = 'themes/' . $this->theme->getDirName();
+    $this->layout['styles'] = url(mix('assets/css/styles.css', $themePath));
+    $this->layout['scripts'] = url(mix('assets/js/scripts.js', $themePath));
+}
+?>
+==
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Utopig Studio">
+        <meta name="generator" content="Utopig Studio">
+
+        <title>{{ this.page.title }} - Utopig Studio</title>
+
+        <meta name="title" content="{{ this.page.meta_title }}">
+        <meta name="description" content="{{ this.page.meta_description }}">
+
+        <meta property="og:title" content="{{ this.page.meta_title }}" />
+        <meta property="og:description" content="{{ this.page.meta_description }}" />
+
+        <meta property="og:url" content="{{ url_current() }}" />
+        <meta property="og:image" content="" />
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <link rel="shortcut icon" href="{{ 'assets/images/favicon.png'|theme }}" type="image/png">
+        <link rel="icon" href="{{ 'assets/images/favicon.png'|theme }}" type="image/png">
+
+        <link href="{{ this.layout.styles }}" rel="stylesheet">
+
+        {% styles %}
+
+    </head>
+    <body class="{{ this.page.bodyClass }}">
+        <div id="app">
+
+            {% partial 'nav' %}
+
+            {% page %}
+
+            {% partial 'footer' %}
+
+        </div>
+
+        <script src="{{ this.layout.scripts }}"></script>
+
+        {% framework extras %}
+    
+        {% scripts %}
+
+    </body>
+</html>
